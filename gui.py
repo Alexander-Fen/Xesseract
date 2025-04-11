@@ -9,12 +9,13 @@ pytesseract.pytesseract.tesseract_cmd = r'K:\Programs\Tesseract\tesseract.exe'
 
 LANGUAGES = {
     'English': 'eng',
-    'German': 'deu',
-    'French': 'fra',
-    'Ukrainian': 'ukr',
-    'Spanish': 'spa',
-    'Italian': 'ita',
-    'Polish': 'pol'
+    'Deutsch': 'deu',
+    'Français': 'fra',
+    'Українська': 'ukr',
+    'Русский': 'rus',
+    'Español': 'spa',
+    'Italiano': 'ita',
+    'Polski': 'pol'
 }
 
 
@@ -68,11 +69,9 @@ class OCRApp:
         self.text_box.pack()
 
         copy_btn = ttk.Button(buttons_frame, text="Copy All", command=self.copy_text)
-        copy_exit_btn = ttk.Button(buttons_frame, text="Copy All & Exit", command=self.copy_and_exit)
-        exit_btn = ttk.Button(exit_frame, text="Cancel", command=lambda: self.root.quit())
+        exit_btn = ttk.Button(exit_frame, text="Close", command=lambda: self.root.quit())
 
         copy_btn.pack(side=tk.LEFT, padx=5)
-        copy_exit_btn.pack(side=tk.LEFT, padx=(0, 5))
         exit_btn.pack(side=tk.LEFT)
 
     def load_image(self):
@@ -103,14 +102,10 @@ class OCRApp:
         self.root.clipboard_append(text)
         self.root.update()
 
-    def copy_and_exit(self):
-        self.copy_text()
-        self.root.quit()
-
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        print("Usage: python gui.py /path/to/image")
+        print("Usage: py gui.py /path/to/image")
         sys.exit(1)
 
     window = tk.Tk()
