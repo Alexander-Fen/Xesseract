@@ -22,7 +22,7 @@ LANGUAGES = {
 class OCRApp:
     def __init__(self, root, image_path):
         self.root = root
-        self.root.title("ShareX + PyTesseract")
+        self.root.title("Xesseract")
         self.root.resizable(False, False)
 
         self.image_path = image_path
