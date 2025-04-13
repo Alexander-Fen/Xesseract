@@ -1,11 +1,14 @@
 import tkinter as tk
-from tkinter import ttk, scrolledtext, messagebox
+from tkinter import ttk, scrolledtext, messagebox, filedialog
 from PIL import Image, ImageTk
+from pathlib import Path
 import pytesseract
 import sv_ttk
+import json
 import sys
+import os
 
-pytesseract.pytesseract.tesseract_cmd = r'K:\Programs\Tesseract\tesseract.exe'
+TESSERACT_EXE_PATH_PATH = Path(os.getenv('ProgramData')) / 'xesseract_tess_location.json'
 
 LANGUAGES = {
     'English': 'eng',
@@ -17,6 +20,26 @@ LANGUAGES = {
     'Italiano': 'ita',
     'Polski': 'pol'
 }
+
+
+def get_tesseract_path():
+    if TESSERACT_EXE_PATH_PATH.exists():
+        with open(TESSERACT_EXE_PATH_PATH, 'r') as f:
+            data = json.load(f)
+            return data.get('tesseract_path')
+    else:
+        file_path = filedialog.askopenfilename(
+            title="Select tesseract.exe",
+            filetypes=[("Tesseract Executable", "tesseract.exe")],
+            defaultextension=".exe"
+        )
+
+        if file_path and file_path.lower().endswith("tesseract.exe"):
+            with open(TESSERACT_EXE_PATH_PATH, 'w') as f:
+                json.dump({'tesseract_path': file_path}, f)
+            return file_path
+        else:
+            raise FileNotFoundError("Tesseract executable not selected.")
 
 
 class OCRApp:
@@ -104,6 +127,8 @@ class OCRApp:
 
 
 if __name__ == "__main__":
+    pytesseract.pytesseract.tesseract_cmd = get_tesseract_path()
+
     if len(sys.argv) != 2:
         print("Usage: py gui.py /path/to/image")
         sys.exit(1)
