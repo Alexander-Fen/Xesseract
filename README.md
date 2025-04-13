@@ -22,6 +22,8 @@ List of OOTB languages:
 
 To add a language add [any language supported by Tesseract](https://tesseract-ocr.github.io/tessdoc/Data-Files-in-different-versions.html) to the `LANGUAGES` dict. 
 
+Note: only the languages selected during the installation of Tesseract OCR will be available for use in Xesseract.
+
 ## Screenshots
 
 ![GUI Screenshot](demo/gui.png)  
