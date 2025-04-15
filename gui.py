@@ -47,6 +47,8 @@ class OCRApp:
         self.root = root
         self.root.title("Xesseract")
         self.root.resizable(False, False)
+        self.root.attributes('-topmost', True)
+        self.root.update()
 
         self.image_path = image_path
         self.original_image = None
