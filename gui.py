@@ -135,7 +135,12 @@ if __name__ == "__main__":
         print("Usage: py gui.py /path/to/image")
         sys.exit(1)
 
-    window = tk.Tk()
-    app = OCRApp(window, sys.argv[1])
-    sv_ttk.set_theme("dark")
-    window.mainloop()
+    supported_file_formats = ['.jpg', '.png', '.jpeg', '.webp', '.bmp']
+
+    if sum([int(sys.argv[1].endswith(supported_file_formats[x])) for x in range(len(supported_file_formats))]) > 0:
+        window = tk.Tk()
+        app = OCRApp(window, sys.argv[1])
+        sv_ttk.set_theme("dark")
+        window.mainloop()
+    else:
+        print(f'Not supported file format.\nList of supported file formats: {supported_file_formats}')
